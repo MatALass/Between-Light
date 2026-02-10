@@ -10,8 +10,11 @@ grav = 0.35;
 // Etat
 dead = false;
 
+jump_pressed = false;
+
 has_double_jump = false;
-can_double_jump = false;
+dj_used = false; // est-ce que le double saut a déjà été utilisé en l’air ?
+
 
 facing = 1;      // 1 droite, -1 gauche
 on_ground = false;
@@ -38,3 +41,5 @@ if (sp != noone) {
 // IMPORTANT : spawn par défaut = position actuelle (après le spawn)
 spawn_x = x;
 spawn_y = y;
+
+can_double_jump = false; // IMPORTANT

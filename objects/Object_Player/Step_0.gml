@@ -11,15 +11,16 @@ vsp += grav;
 
 // --- SOL ? (avec active_now) ---
 var p = instance_place(x, y + 1, Object_Platform);
-var on_ground = (p != noone) && p.active_now;
+on_ground = (p != noone) && p.active_now;
 
-// --- SAUT (simple + double jump) ---
+// --- SAUT (simple + double saut) ---
 var jumpPressed =
     keyboard_check_pressed(vk_up)
     || keyboard_check_pressed(ord("Z"))
     || keyboard_check_pressed(ord("W"))
     || keyboard_check_pressed(vk_space);
 
+// Quand on touche le sol : on recharge le double saut
 if (on_ground) {
     can_double_jump = true;
 }
@@ -27,30 +28,31 @@ if (on_ground) {
 if (jumpPressed) {
     if (on_ground) {
         vsp = jump_spd;
-    } else if (has_double_jump && can_double_jump) {
+    }
+    else if (has_double_jump && can_double_jump) {
         vsp = jump_spd;
-        can_double_jump = false;
+        can_double_jump = false; // on consomme le double saut
     }
 }
 
-// --- COLLISION H ---
+
+// COLLISION H
 var pH = instance_place(x + hsp, y, Object_Platform);
 if (pH != noone && pH.active_now) {
-    while (true) {
-        var pTest = instance_place(x + sign(hsp), y, Object_Platform);
-        if (pTest != noone && pTest.active_now) break;
+    while (!place_meeting(x + sign(hsp), y, Object_Platform) 
+           || instance_place(x + sign(hsp), y, Object_Platform).active_now == false) {
         x += sign(hsp);
     }
     hsp = 0;
 }
 x += hsp;
 
-// --- COLLISION V ---
+// COLLISION V
 var pV = instance_place(x, y + vsp, Object_Platform);
 if (pV != noone && pV.active_now) {
     while (true) {
-        var pTest = instance_place(x, y + sign(vsp), Object_Platform);
-        if (pTest != noone && pTest.active_now) break;
+        var pCheck = instance_place(x, y + sign(vsp), Object_Platform);
+        if (pCheck != noone && pCheck.active_now) break;
         y += sign(vsp);
     }
     vsp = 0;

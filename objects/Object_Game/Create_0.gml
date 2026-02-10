@@ -4,12 +4,7 @@ global.levels = [
     Room_Level2,
     Room_Level3,
     Room_Level4,
-    Room_Level5,
-    Room_Level6,
-    Room_Level7,
-    Room_Level8,
-    Room_Level9,
-    Room_Level10
+    Room_Level5
 ];
 
 // Trouver l'index du niveau actuel
@@ -20,3 +15,17 @@ for (var i = 0; i < array_length(global.levels); i++) {
         break;
     }
 }
+
+in_shadows = false;
+
+bg_light  = Sprite_Background_Shadow;
+bg_shadow = Sprite_Background_Light;
+
+// Récupère l'ID du layer puis l'ID de l'élément background dans ce layer
+var layer_id = layer_get_id("Background");
+bg_element_id = layer_background_get_id(layer_id);
+
+// Sprite de départ
+layer_background_sprite(bg_element_id, bg_light);
+
+audio_play_sound(mus_level, 1, true, 0.2);

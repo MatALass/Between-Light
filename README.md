@@ -7,6 +7,8 @@ The game explores basic mechanics around **navigation, obstacles, and progressio
 
 ---
 
+![Gameplay Screenshot](assets/Illustration2.jpg)
+
 ## Game Concept
 
 Between Light challenges the player to:
@@ -18,6 +20,10 @@ Between Light challenges the player to:
 This project focuses on game prototyping and implementation of core gameplay elements rather than polished level design.
 
 ---
+
+
+![Game Environment](assets/image.png)
+
 
 ## What I Did
 
